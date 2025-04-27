@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'QPX6jVmGM19eFaMyk8m4mxVYmHDWo992';
+const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = 'https://api.nytimes.com/svc/mostpopular/v2';
 
 export const fetchMostPopularArticles = async (period = 1) => {
