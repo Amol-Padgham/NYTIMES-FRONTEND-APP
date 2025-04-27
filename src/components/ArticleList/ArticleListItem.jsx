@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ArticleListItem = ({ article }) => {
+const ArticleListItem = ({ article, selectedPeriod }) => {
   const navigate = useNavigate();
   const { id, title, abstract, byline, published_date, media } = article;
   const imageUrl = media?.[0]?.['media-metadata']?.[2]?.url;
 
   const openArticleDetail = () => {
-    navigate(`/detail/${id}`);
+    navigate(`/detail/${id}?period=${selectedPeriod}`);
   };
 
   return (
@@ -17,20 +17,18 @@ const ArticleListItem = ({ article }) => {
     >
       {imageUrl && (
         <div className="imgContainer">
-            <img
-          src={imageUrl}
-          alt={title}
-          className="article-image w-60 h-40 object-cover rounded-lg"
-        />
+          <img
+            src={imageUrl}
+            alt={title}
+            className="article-image w-60 h-40 object-cover rounded-lg"
+          />
         </div>
       )}
       <div className="article-content text-left flex-1 flex flex-col justify-center">
-        <h2 className="text-2xl font-bold text-blue-600 hover:underline">
-          {title}
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mt-2" style={{ marginTop: 'auto' }}>{abstract}</p>
+        <h2 className="text-2xl font-bold text-blue-600 hover:underline">{title}</h2>
+        <p className="text-gray-600 dark:text-gray-300 mt-2">{abstract}</p>
         <div className="text-sm text-gray-500 mt-4 flex justify-between items-center">
-          <span>{byline}</span> 
+          <span>{byline}</span>
           <span>{new Date(published_date).toLocaleDateString()}</span>
         </div>
         <div className="mt-6 readBtnContainer">
